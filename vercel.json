@@ -1,12 +1,10 @@
 {
   "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/public",
   "builds": [
     {
-      "src": "dist/index.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "dist/public/**",
+      "src": "attached_assets/**",
       "use": "@vercel/static"
     }
   ],
@@ -16,17 +14,8 @@
       "dest": "/attached_assets/$1"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/dist/index.js"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/dist/public/index.html"
+      "dest": "/index.html"
     }
-  ],
-  "functions": {
-    "dist/index.js": {
-      "maxDuration": 30
-    }
-  }
+  ]
 }

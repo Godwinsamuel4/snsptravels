@@ -4,6 +4,15 @@ import { storage } from "./storage";
 import nodemailer from "nodemailer";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Health check endpoint
+  app.get("/health", (req, res) => {
+    res.status(200).json({ 
+      status: "healthy", 
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime() 
+    });
+  });
+
   // Flight booking submission endpoint
   app.post("/api/flight-booking", async (req, res) => {
     try {

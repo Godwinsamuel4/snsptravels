@@ -129,6 +129,13 @@ import { fileURLToPath } from "url";
 import { createServer } from "http";
 import nodemailer from "nodemailer";
 async function registerRoutes(app2) {
+  app2.get("/health", (req, res) => {
+    res.status(200).json({
+      status: "healthy",
+      timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+      uptime: process.uptime()
+    });
+  });
   app2.post("/api/flight-booking", async (req, res) => {
     try {
       const bookingData = req.body;
