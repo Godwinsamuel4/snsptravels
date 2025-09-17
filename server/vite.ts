@@ -21,10 +21,14 @@ export function log(message: string, source = "express") {
 
 export function serveStatic(app: Express) {
   const distPath = path.resolve(import.meta.dirname, "..", "dist", "public");
-  
+  const attachedAssetsPath = path.resolve(import.meta.dirname, "..", "attached_assets");
+
+  // Serve attached assets
+  app.use('/attached_assets', express.static(attachedAssetsPath));
+
   if (fs.existsSync(distPath)) {
     app.use(express.static(distPath));
-    
+
     app.get("*", (req, res) => {
       if (!req.path.startsWith("/api")) {
         res.sendFile(path.join(distPath, "index.html"));
