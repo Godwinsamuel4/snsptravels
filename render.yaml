@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: snsp-travel-website
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        sync: false
+    disk:
+      name: snsp-storage
+      mountPath: /app/attached_assets
+      sizeGB: 1
