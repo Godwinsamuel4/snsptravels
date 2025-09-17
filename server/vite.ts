@@ -19,6 +19,22 @@ export function log(message: string, source = "express") {
   console.log(`${formattedTime} [${source}] ${message}`);
 }
 
+export function serveStatic(app: Express) {
+  const distPath = path.resolve(import.meta.dirname, "..", "dist", "public");
+  
+  if (fs.existsSync(distPath)) {
+    app.use(express.static(distPath));
+    
+    app.get("*", (req, res) => {
+      if (!req.path.startsWith("/api")) {
+        res.sendFile(path.join(distPath, "index.html"));
+      }
+    });
+  } else {
+    log("Build directory not found. Please run 'npm run build' first.");
+  }
+}
+
 export async function setupVite(app: Express, server: Server) {
   const serverOptions = {
     middlewareMode: true,
