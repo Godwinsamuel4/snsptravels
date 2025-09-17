@@ -187,9 +187,13 @@ function AirportSearchInput({ value, onChange, placeholder, label, testId }: Air
     setShowSuggestions(true);
   };
 
-  const handleInputBlur = () => {
+  const handleInputBlur = (e: React.FocusEvent) => {
+    // Check if the blur is because we're clicking on a suggestion
+    if (e.relatedTarget && e.relatedTarget.closest('.suggestions-dropdown')) {
+      return; // Don't hide suggestions if clicking on dropdown
+    }
     // Delay hiding suggestions to allow for clicks
-    setTimeout(() => setShowSuggestions(false), 200);
+    setTimeout(() => setShowSuggestions(false), 300);
   };
 
   return (
@@ -208,11 +212,12 @@ function AirportSearchInput({ value, onChange, placeholder, label, testId }: Air
       />
       
       {showSuggestions && filteredAirports.length > 0 && (
-        <div className="absolute top-full left-0 right-0 z-50 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto mt-1">
+        <div className="absolute top-full left-0 right-0 z-50 bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-y-auto mt-1 suggestions-dropdown">
           {filteredAirports.map((airport, index) => (
             <div
               key={`${airport.IATA}-${index}`}
               className="px-4 py-3 hover:bg-gray-100 cursor-pointer border-b border-gray-100 last:border-b-0"
+              onMouseDown={(e) => e.preventDefault()} // Prevent blur from firing
               onClick={() => handleSuggestionSelect(airport)}
             >
               <div className="flex items-center gap-2">
