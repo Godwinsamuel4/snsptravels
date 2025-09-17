@@ -1,12 +1,34 @@
 import express, { type Request, Response, NextFunction } from "express";
+import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { log } from "./vite_middleware";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Local serveStatic function for production
+function serveStatic(app: express.Application) {
+  const distPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "dist", "public");
+  const attachedAssetsPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "attached_assets");
+
+  // Serve attached assets
+  app.use('/attached_assets', express.static(attachedAssetsPath));
+
+  if (fs.existsSync(distPath)) {
+    app.use(express.static(distPath));
+
+    app.get("*", (req, res) => {
+      if (!req.path.startsWith("/api")) {
+        res.sendFile(path.join(distPath, "index.html"));
+      }
+    });
+  } else {
+    log("Build directory not found. Please run 'npm run build' first.");
+  }
+}
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -57,6 +79,7 @@ app.use((req, res, next) => {
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
   if (app.get("env") === "development") {
+    const { setupVite } = await import("./vite_middleware");
     await setupVite(app, server);
   } else {
     serveStatic(app);
