@@ -99,6 +99,19 @@ function AirportSearchInput({ value, onChange, placeholder, label, icon, testId 
     loadAirports();
   }, []);
 
+  // Sync searchTerm with value prop for proper display
+  useEffect(() => {
+    if (value && airports.length > 0) {
+      const selectedAirport = airports.find(airport => airport.IATA === value);
+      if (selectedAirport) {
+        const displayValue = `${selectedAirport.IATA} - ${selectedAirport["Airport name"]}, ${selectedAirport.City}, ${selectedAirport.Country}`;
+        setSearchTerm(displayValue);
+      }
+    } else if (!value) {
+      setSearchTerm("");
+    }
+  }, [value, airports]);
+
   const handleInputChange = (inputValue: string) => {
     setSearchTerm(inputValue);
     
@@ -236,7 +249,7 @@ export default function FlightBookingForm() {
         alert("Thank you for your booking request! We've received your details and will contact you within 24 hours with personalized flight options. You'll also receive a confirmation email shortly.");
         
         // Reset form
-        setFormData({
+        const resetFormData = {
           fullName: "",
           email: "",
           phone: "",
@@ -247,7 +260,8 @@ export default function FlightBookingForm() {
           passengers: "1",
           class: "Economy",
           specialRequests: "",
-        });
+        };
+        setFormData(resetFormData);
       } else {
         throw new Error('Failed to submit booking request');
       }
