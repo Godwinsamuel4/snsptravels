@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Plane, Quote } from "lucide-react";
 import { useLocation } from "wouter";
-import heroBackground from "/attached_assets/generated_images/Tropical_beach_hero_background_6df6d6fc.png";
+import heroBackground from "@assets/generated_images/Tropical_beach_hero_background_6df6d6fc.png";
 
 export default function Hero() {
   const [, setLocation] = useLocation();

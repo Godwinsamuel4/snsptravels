@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "wouter";
-import logoImage from "/attached_assets/Snowy-Spring-logo_1757438803888_1758027378266.png";
+import logoImage from "@assets/Snowy-Spring-logo_1757438803888_1758027378266.png";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

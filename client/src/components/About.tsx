@@ -1,8 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Users, Target, Award } from "lucide-react";
-import ceoImage from "/attached_assets/generated_images/Professional_CEO_headshot_portrait_989b0458.png";
-import officeImage from "/attached_assets/generated_images/Modern_office_interior_setting_852e7d49.png";
+import ceoImage from "@assets/generated_images/Professional_CEO_headshot_portrait_989b0458.png";
+import officeImage from "@assets/generated_images/Modern_office_interior_setting_852e7d49.png";
 
 const features = [
   {
