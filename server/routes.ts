@@ -2,7 +2,7 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import nodemailer from "nodemailer";
-import { routes } from './routes';
+import { router as routes } from './routes/index';
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Health check endpoint

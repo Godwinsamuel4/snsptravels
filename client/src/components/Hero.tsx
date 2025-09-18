@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Plane, Quote } from "lucide-react";
 import { useLocation } from "wouter";
-import heroImage from "@assets/generated_images/Tropical_beach_hero_background_6df6d6fc.png";
+import heroBackground from "/attached_assets/generated_images/Tropical_beach_hero_background_6df6d6fc.png";
 
 export default function Hero() {
   const [, setLocation] = useLocation();
-  
+
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -34,12 +34,12 @@ export default function Hero() {
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
+        style={{ backgroundImage: `url(${heroBackground})` }}
       />
-      
+
       {/* Dark Overlay for text readability */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/30" />
-      
+
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="max-w-4xl mx-auto">
@@ -52,7 +52,7 @@ export default function Hero() {
           <p className="text-lg text-white/80 mb-12 max-w-2xl mx-auto">
             Experience seamless travel planning with our expert team, tailored to your dream destinations.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
@@ -63,7 +63,7 @@ export default function Hero() {
               <Plane className="mr-2 h-5 w-5" />
               Explore Services
             </Button>
-            
+
             <Button
               size="lg"
               variant="outline"
@@ -77,7 +77,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      
+
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">

@@ -1,8 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Users, Target, Award } from "lucide-react";
-import ceoImage from "@assets/generated_images/Professional_CEO_headshot_portrait_989b0458.png";
-import officeImage from "@assets/generated_images/Modern_office_interior_setting_852e7d49.png";
+import ceoImage from "/attached_assets/generated_images/Professional_CEO_headshot_portrait_989b0458.png";
+import officeImage from "/attached_assets/generated_images/Modern_office_interior_setting_852e7d49.png";
 
 const features = [
   {
@@ -59,7 +59,7 @@ export default function About() {
               Get Started Today
             </Button>
           </div>
-          
+
           <div className="relative">
             <img
               src={officeImage}
@@ -84,7 +84,7 @@ export default function About() {
               <p className="text-lg text-muted-foreground">CEO, SSG Travels</p>
             </div>
           </div>
-          
+
           <div className="lg:order-1">
             <h3 className="text-2xl font-bold text-foreground mb-6">
               Leadership Excellence

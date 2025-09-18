@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { Link, useLocation } from "wouter";
-import logoImage from "@assets/Snowy-Spring-logo_1757438803888_1758027378266.png";
+import logoImage from "/attached_assets/Snowy-Spring-logo_1757438803888_1758027378266.png";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +12,7 @@ export default function Header() {
   const menuItems = [
     { name: "Home", href: "/" },
     {
-      name: "Services", 
+      name: "Services",
       href: "/services",
       submenu: [
         { name: "Flight Services", href: "/services/flights" },
@@ -50,7 +50,7 @@ export default function Header() {
               item.submenu ? (
                 <DropdownMenu key={item.name}>
                   <DropdownMenuTrigger asChild>
-                    <button 
+                    <button
                       className={`flex items-center gap-1 transition-colors ${
                         isActive(item.href) ? 'text-primary' : 'text-foreground hover:text-primary'
                       }`}
