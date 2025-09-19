@@ -1,22 +1,25 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import path from "path"
+import react from '@vitejs/plugin-react-swc'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
-// https://vitejs.dev/config/
+// 🔧 Fix __dirname in ESM
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+
 export default defineConfig({
   plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@assets": path.resolve(__dirname, "../attached_assets"),
-    },
-  },
-  server: {
-    port: 5173,
-    host: '0.0.0.0'
+  optimizeDeps: {
+    // 👇 Disable esbuild pre-bundling by forcing SWC/rollup only
+    esbuildOptions: undefined,
   },
   build: {
-    outDir: "dist",
-    emptyOutDir: true,
+    target: 'esnext', // avoid triggering esbuild transforms
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'client/src'),
+      '@shared': path.resolve(__dirname, 'shared'),
+    },
   },
 })

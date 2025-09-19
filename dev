@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+import { spawn } from 'child_process';
+
+// Start the integrated dev server
+const child = spawn('tsx', ['backend/src/dev-server.ts'], {
+  stdio: 'inherit',
+  shell: true
+});
+
+child.on('exit', (code) => {
+  process.exit(code);
+});
